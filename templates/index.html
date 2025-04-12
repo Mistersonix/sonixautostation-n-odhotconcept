@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Upload Produk</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f4;
+            color: #333;
+            position: relative;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('{{ url_for("static", filename="logo.png") }}') no-repeat center center;
+            background-size: contain;
+            opacity: 0.2;
+            z-index: -1;
+        }
+
+        h1 {
+            text-align: center;
+            color: #222;
+            margin: 5px 0;
+        }
+
+        form {
+            max-width: 500px;
+            margin: 30px auto;
+            background: #fff;
+            padding: 20px 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        label {
+            display: block;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        input[type="text"],
+        input[type="number"],
+        input[type="file"] {
+            width: 100%;
+            padding: 10px;
+            margin-top: 6px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+        }
+
+        button {
+            display: block;
+            width: 100%;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 12px;
+            font-size: 16px;
+            margin-top: 20px;
+            cursor: pointer;
+            border-radius: 8px;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        a {
+            display: block;
+            text-align: center;
+            margin-top: 30px;
+            color: #007bff;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 600px) {
+            form {
+                padding: 20px;
+                margin: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <h1>DATA UPLOAD PRODUK</h1>
+    <h1>SONIXAUTOSTATION x ODHOTCONCEPT</h1>
+
+    <form method="post" enctype="multipart/form-data" action="/upload">
+        <label>Nama Barang:
+            <input type="text" name="name" required>
+        </label>
+        <label>Harga:
+            <input type="number" name="price" required>
+        </label>
+        <label>Upload Gambar:
+            <input type="file" name="image" accept="image/*">
+        </label>
+        <button type="submit">Simpan</button>
+    </form>
+
+    <a href="/products">Lihat Semua Produk</a>
+
+</body>
+</html>

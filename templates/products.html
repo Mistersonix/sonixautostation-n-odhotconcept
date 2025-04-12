@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Daftar Produk</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        /* [CSS sebelumnya tetap sama] */
+    </style>
+</head>
+<body>
+    <h1>Semua Produk</h1>
+    <div class="top-bar">
+        <a href="/">⬅ Kembali ke Form</a>
+        <input type="text" id="searchInput" placeholder="Cari produk...">
+    </div>
+
+    <div class="product-list" id="productList">
+        {% for product in products %}
+        <div class="product-card" data-name="{{ product.name }}">
+            {% if product.image %}
+            <img src="{{ url_for('static', filename='uploads/' ~ product.image) }}" alt="{{ product.name }}">
+            {% endif %}
+            <strong>{{ product.name }}</strong>
+            <div>Rp{{ product.price }}</div>
+            <small>{{ product.timestamp }}</small>
+            <div class="product-actions">
+                <a href="/edit/{{ product.id }}" class="btn-edit">Edit</a>
+                <a href="/delete/{{ product.id }}" class="btn-delete" onclick="return confirmDelete()">Hapus</a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <script>
+        const searchInput = document.getElementById("searchInput");
+        const productCards = document.querySelectorAll(".product-card");
+
+        searchInput.addEventListener("input", () => {
+            const keyword = searchInput.value.toLowerCase(); // Ubah input ke lowercase
+            productCards.forEach(card => {
+                const name = card.dataset.name.toLowerCase(); // Ubah nama produk ke lowercase
+                card.style.display = name.includes(keyword) ? "flex" : "none";
+            });
+        });
+
+        function confirmDelete() {
+            return confirm('Apakah Anda yakin ingin menghapus produk ini?');
+        }
+    </script>
+<script>
+    const searchInput = document.getElementById("searchInput");
+    const productCards = document.querySelectorAll(".product-card");
+
+    searchInput.addEventListener("input", () => {
+        const keyword = searchInput.value.toLowerCase(); // Input diubah ke lowercase
+        productCards.forEach(card => {
+            const name = card.dataset.name.toLowerCase(); // Nama produk diubah ke lowercase
+            card.style.display = name.includes(keyword) ? "flex" : "none";
+        });
+    });
+
+    function confirmDelete() {
+        return confirm('Apakah Anda yakin ingin menghapus produk ini?');
+    }
+</script>
+</body>
+</html>

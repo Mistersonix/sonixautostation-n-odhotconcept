@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Produk</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f4f4f4;
+            padding: 20px;
+            color: #333;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        form {
+            max-width: 500px;
+            margin: 30px auto;
+            background: #fff;
+            padding: 20px 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        label {
+            display: block;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        input[type="text"],
+        input[type="number"],
+        input[type="file"] {
+            width: 100%;
+            padding: 10px;
+            margin-top: 6px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+        }
+
+        button {
+            width: 100%;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            padding: 12px;
+            font-size: 16px;
+            margin-top: 20px;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        a {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            color: #007bff;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        img.preview {
+            max-width: 100%;
+            margin-top: 10px;
+            border-radius: 6px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Edit Produk</h1>
+
+    <form method="POST" enctype="multipart/form-data">
+        <label>Nama Barang:
+            <input type="text" name="name" value="{{ product.name }}" required>
+        </label>
+        <label>Harga:
+            <input type="number" name="price" value="{{ product.price }}" required>
+        </label>
+        <label>Gambar Baru (opsional):
+            <input type="file" name="image">
+            {% if product.image %}
+            <img src="{{ url_for('static', filename='uploads/' ~ product.image) }}" class="preview">
+            {% endif %}
+        </label>
+        <button type="submit">💾 Simpan Perubahan</button>
+    </form>
+
+    <a href="{{ url_for('products_page') }}">⬅ Kembali ke Daftar Produk</a>
+
+</body>
+</html>

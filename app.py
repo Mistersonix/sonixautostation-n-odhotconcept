@@ -14,7 +14,7 @@ products = []
 def index():
     return render_template('index.html')
 
-@app.route('/upload', methods=['POST'])
+@app.route('/products', methods=['POST'])
 def upload():
     name = request.form['name']
     price = request.form['price']
